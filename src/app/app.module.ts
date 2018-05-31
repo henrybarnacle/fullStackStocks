@@ -24,6 +24,11 @@ import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+
+
+
 
 
 const appRoutes: Routes = [
@@ -89,7 +94,9 @@ const appRoutes: Routes = [
     { enableTracing: true } // <-- debugging purposes only
   )
   ],
-  providers: [ StockService, ValidateService, AuthService, AuthGuard ],
+
+  providers: [ StockService, ValidateService, AuthService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
