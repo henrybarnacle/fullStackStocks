@@ -1,0 +1,47 @@
+<div class="container">
+	<h1>Stock Search</h1>
+	<br>
+	<form class="form-inline">
+		<div class="form-group">
+			<input type="search"
+			       class="form-control"
+			       placeholder="Enter stock code"
+			       #search>
+			       <br>
+		<button type="button" class="btn btn-primary ml-2" (click)="getStock(search.value)">Search</button>
+		<button *ngIf="user" type="button" class="btn btn-success ml-2" (click)="saveStock(search.value)"> Add to Portfolio</button>
+		</div>
+
+	</form>
+</div>
+<br>
+<br>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>
+				{{ stock.companyName }}			
+			</h1>
+		</div>
+		<div class="col-md-6">
+			<h2>
+	  		{{stock.code}}
+	  		</h2>
+	  	</div>
+	  </div>
+	  <div class="row">
+	  	<div class="col-md-6">
+			<h2>
+			  {{stock.latestTime}}
+			</h2>
+		</div>
+		<div class="col-md-6">
+			<h1>
+			  {{'$' + stock.open}}
+			</h1>
+		</div>
+	</div>
+</div>
+

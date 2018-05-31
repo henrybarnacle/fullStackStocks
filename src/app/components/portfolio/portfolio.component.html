@@ -1,0 +1,29 @@
+<div class="container" >
+  <h1>Portfolio</h1>
+  <table class="table table-dark" *ngIf="user">
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Date Added</th>
+        <th>Price then</th>
+        <th>Price now</th>
+        <th>Change  % </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of stocks">
+        <td>{{ stock.companyName }}</td>
+        <td> {{ stock.date| date:'longDate' }} </td>
+        <td>$ {{ stock.open }} </td>
+        <td>$ {{ stock.currentPrice }}</td>
+        <td>{{(stock.currentPrice-stock.open) / (stock.open / 100) | number: '1.2-2'}} </td>
+         <td>
+			<a [routerLink]="['/stock-details', stock._id]">Details</a>
+		</td>
+    </tr>
+      
+     
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+ 			 <h1>{{ stock.companyName }}</h1>
+		</div>
+	</div>
+
+  <div class="row">
+  	    <div class="col-md-6">
+			<div class="list">
+			 	<dt>Symbol</dt>
+    		 	<dd>{{ stock.code }}</dd>
+    		</div>
+    	</div>
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Date Added</dt>
+    				<dd>{{ stock.date | date:'longDate' }}</dd>
+    		    </div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    			<div class="list">
+   					 <dt>Price when added</dt>
+    				 <dd>{{ stock.open }}</dd>
+    	    	</div>
+    	</div>
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Latest Price</dt>
+    				<dd>{{ stock.latestPrice }}</dd>
+    	    	</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>52 Week High</dt>
+    				<dd>{{ stock.week52High }}</dd>
+    	    	</div>
+    	</div>
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>52 Week Low</dt>
+    				<dd>{{ stock.week52Low }}</dd>
+    	    	</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Sector</dt>
+   					<dd>{{ stock.sector }}</dd>
+   		    	</div>
+    	</div>
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Price/Earnings Ratio</dt>
+    				<dd>{{ stock.peRatio }}</dd>
+    	    	</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Average Total Volume</dt>
+    				<dd>{{ stock.avgTotalVolume }}</dd>
+    	    	</div>
+    	</div>
+    	<div class="col-md-6">
+    			<div class="list">
+    				<dt>Primary Exchange</dt>
+    				<dd>{{ stock.primaryExchange }}</dd>
+    	    	</div>
+    	</div>
+  </div>
+  <div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-danger" type="button" (click)="deleteStock(stock._id)">Delete Stock</button>
+  </div>
+</div>
+</div>
+
+
+
