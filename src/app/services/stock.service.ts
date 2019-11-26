@@ -10,6 +10,7 @@ import './rxjs-operators';
 
 export class StockService {
 stock: Stock;
+token = 'pk_14ff5b2da8d34d95add9a14592bb4ea6';
 
 
 constructor(private http: Http) { }
@@ -18,13 +19,15 @@ constructor(private http: Http) { }
 
 getData(code: string): Observable<Stock> {
 
-let stockUrl = `https://api.iextrading.com/1.0/stock/${code}/batch?types=quote,news,chart&range=1m&last=10`;
+let stockUrl = `https://cloud.iexapis.com/stable/stock/${code}/quote/?token=${this.token}`;
+
 
 	return this.http.get(stockUrl)
 		.map(this.extractData)
 		.catch(this.handleError);
 	}
 	    private extractData(res: Response) {
+      console.log(res);
       let body = res.json();
       console.log(body);
       this.stock = new Stock();

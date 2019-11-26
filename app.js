@@ -13,7 +13,7 @@ const config = require('./config/database');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://henrybarnacle:henrybarnacle@ds145380.mlab.com:45380/myportfolio', { useMongoClient: true, promiseLibrary: require('bluebird') })
-  .then(() =>  console.log('connection succesful'))
+  .then(() =>  console.log('connection succesful!'))
   .catch((err) => console.error(err));
 
 var stock = require('./routes/stock');

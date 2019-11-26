@@ -9,6 +9,7 @@ const session = require('express-session');
 
 // Register
 router.post('/register', (req, res, next) => {
+  console.log('here');
   let newUser = new User({
     name: req.body.name,
     email: req.body.email,
