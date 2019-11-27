@@ -12,7 +12,7 @@ import { Stock } from '../../models/Stock';
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.css'],
   providers: [ StockService]
-  
+
 })
 
 export class StockComponent {
@@ -20,15 +20,14 @@ export class StockComponent {
 	user: any;
 	private errorMessage: any = '';
 
-	
+
 
   constructor(private authService: AuthService, private stockService: StockService, private http: Http, private _flashMessagesService: FlashMessagesService ) { }
 
   ngOnInit() {
       this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
-      console.log(this.user);
-      
+      this.setInitialStockValues();
     },
      err => {
        console.log(err);
@@ -38,29 +37,44 @@ export class StockComponent {
   }
 
 
-getStock(code: string) {
-	this.stockService.getData(code)
-	.subscribe(
-	response => { 
-	this.stock = response;
-	console.log(this.stock);
-		});
-	}
-
-saveStock( code: string) {
-this.stock.user = this.user._id;
-this._flashMessagesService.show('Stock added to Portfolio' , {
-        cssClass:'alert-success', timeout: 4000
+  getStock(code: string) {
+    this.stockService.getData(code)
+    .subscribe(
+    response => {
+    this.stock = response;
+    console.log(this.stock);
       });
+    }
 
+  setInitialStockValues() {
+    this.stock = {
+      code: '',
+      companyName: '',
+      latestTime: '',
+      open: null,
+      date: '',
+      latestPrice: null,
+      week52High: null,
+      week52Low: null,
+      primaryExchange: '',
+      sector: '',
+      peRatio: null,
+      avgTotalVolume: null,
+      user: ''
+    };
+  }
+
+  saveStock( code: string) {
+    this.stock.user = this.user._id;
+    this._flashMessagesService.show('Stock added to Portfolio', {
+      cssClass: 'alert-success', timeout: 4000
+    });
     this.http.post('/stock', this.stock)
       .subscribe(res => {
-          let id = res['_id'];
+          const id = res['_id'];
         }, (err) => {
           console.log(err);
         }
       );
-
-  }
-
+    }
 }
