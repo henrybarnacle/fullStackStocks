@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && forever start --minUptime 1000 --spinSleepTime 1000 node ./bin/www",
+    "start": "ng build && forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
