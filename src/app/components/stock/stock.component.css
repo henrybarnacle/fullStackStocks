@@ -17,9 +17,36 @@ h1, h2 {
   align-content: center;
 }
 
+.content-user {
+  margin-left: 26%;
+  margin-right: 40%;
+  align-content: center;
+}
+
 .red {
   color: red;
 }
 .green {
   color: green;
+}
+
+@media screen and (max-width: 770px) {
+  .content-user {
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 994px) {
+  .content-user {
+    margin-left: 18%;
+  }
+  .content {
+    margin-left: 30%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .content-user {
+    margin-left: 30%;
+  }
 }
