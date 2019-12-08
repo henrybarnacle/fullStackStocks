@@ -1,7 +1,7 @@
 <div class="container">
 	<h1 class="text large">Stock Search</h1>
 	<br>
-  <div class="content">
+  <div class="content" [ngClass]="user ? 'content-user' : 'content'">
     <form class="form-inline">
       <div class="form-group">
         <input type="search"
