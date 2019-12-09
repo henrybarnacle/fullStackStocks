@@ -15,35 +15,31 @@ declare var $: any;
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
-  providers: [StockService]
+  providers: []
 })
 export class PortfolioComponent implements OnInit { 
 
 user:any;
-
 stocks: any;
 response: any;
+liveUpdates: boolean;
+
+constructor( private authService:AuthService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private stockService: StockService, private _flashMessagesService: FlashMessagesService){}
 
 
-  constructor( private authService:AuthService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private stockService: StockService, private _flashMessagesService: FlashMessagesService){
-
+ngOnInit() {
+    this.authService.getProfile().subscribe(profile => {
+    this.user = profile.user;
+    console.log(this.user);
+    this.showPortfolio();
+    this.liveUpdates = true;
+    this.liveUpdate();
+  },
+   err => {
+     console.log(err);
+     return false;
+   });
 }
-
-
-  ngOnInit() {
-      this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-      console.log(this.user);
-      this.showPortfolio();
-
-      
-    },
-     err => {
-       console.log(err);
-       return false;
-     });
-	 
-  }
 
 showPortfolio() { 
     	this.http.get('/stock').subscribe(data =>  {
@@ -54,22 +50,31 @@ showPortfolio() {
   			this.getPrice(code, function(response) { 
   				i.currentPrice = response;
   			});
-  			
   			console.log(i);
-
   			}
   		});
-  		}
+ }
+
 getPrice(code, callback) {
   		this.stockService.getData(code)
 		.subscribe(
-		response => { 
-		this.response = response.open;
-		
-		console.log(this.response);
+		response => { 	
 		callback(response.open);
 			});
   		}
+
+  liveUpdate() {
+    setTimeout(() => {
+      if (this.liveUpdates) {
+      this.showPortfolio();
+      this.liveUpdate();
+      }
+    }, 30000);
+  }
+
+  viewDetail(stock) {
+    this.stockService.setDetailView(stock);
+  }
 
 
 
