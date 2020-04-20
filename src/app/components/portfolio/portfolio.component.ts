@@ -17,12 +17,12 @@ declare var $: any;
   styleUrls: ['./portfolio.component.css'],
   providers: []
 })
-export class PortfolioComponent implements OnInit { 
+export class PortfolioComponent implements OnInit {
 
 user:any;
 stocks: any;
 response: any;
-liveUpdates: boolean;
+
 
 constructor( private authService:AuthService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private stockService: StockService, private _flashMessagesService: FlashMessagesService){}
 
@@ -32,8 +32,6 @@ ngOnInit() {
     this.user = profile.user;
     console.log(this.user);
     this.showPortfolio();
-    this.liveUpdates = true;
-    this.liveUpdate();
   },
    err => {
      console.log(err);
@@ -41,13 +39,13 @@ ngOnInit() {
    });
 }
 
-showPortfolio() { 
+showPortfolio() {
     	this.http.get('/stock').subscribe(data =>  {
   		this.stocks = data;
 
   		for (let i of this.stocks) {
   			let code = i.code;
-  			this.getPrice(code, function(response) { 
+  			this.getPrice(code, function(response) {
   				i.currentPrice = response;
   			});
   			console.log(i);
@@ -58,19 +56,10 @@ showPortfolio() {
 getPrice(code, callback) {
   		this.stockService.getData(code)
 		.subscribe(
-		response => { 	
+		response => {
 		callback(response.open);
 			});
   		}
-
-  liveUpdate() {
-    setTimeout(() => {
-      if (this.liveUpdates) {
-      this.showPortfolio();
-      this.liveUpdate();
-      }
-    }, 30000);
-  }
 
   viewDetail(stock) {
     this.stockService.setDetailView(stock);

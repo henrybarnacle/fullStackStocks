@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject'; 
+import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import './rxjs-operators';
 
@@ -23,7 +23,7 @@ constructor(private http: Http) {
  }
 
 getData(code: string): Observable<Stock> {
-
+console.log(code);
 let stockUrl = `https://cloud.iexapis.com/stable/stock/${code}/quote/?token=${this.token}`;
 
 	return this.http.get(stockUrl)
@@ -32,6 +32,7 @@ let stockUrl = `https://cloud.iexapis.com/stable/stock/${code}/quote/?token=${th
 	}
 
   private extractData(res: Response) {
+console.log(res);
     const body = res.json();
     this.stock = new Stock();
     this.stock.companyName = body.companyName;
@@ -73,9 +74,9 @@ let stockUrl = `https://cloud.iexapis.com/stable/stock/${code}/quote/?token=${th
     return this.stockHistory;
   }
 
- 
 
-        private handleError(error: any) {
+
+   private handleError(error: any) {
       let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server   error';
       console.error(errMsg); // log to console instead
@@ -86,9 +87,9 @@ let stockUrl = `https://cloud.iexapis.com/stable/stock/${code}/quote/?token=${th
 
 
 
-  
-  
-    
+
+
+
 
 
 

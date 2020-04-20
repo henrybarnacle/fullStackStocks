@@ -19,11 +19,11 @@
         <td>$ {{ stock.currentPrice }}</td>
         <td>{{(stock.currentPrice-stock.open) / (stock.open / 100) | number: '1.2-2'}} </td>
          <td>
-			<a [routerLink]="['/stock-details', stock._id]">Details</a>
+			<a [routerLink]="['/stock-details', stock.code]">Details</a>
 		</td>
     </tr>
-      
-     
+
+
     </tbody>
   </table>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StockService } from '../../services/stock.service';
 
 @Component({
   selector: 'app-stock-detail',
@@ -12,18 +13,19 @@ export class StockDetailComponent implements OnInit {
 
   stock = {};
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private stockService: StockService) { }
 
   ngOnInit() {
     this.getStockDetail(this.route.snapshot.params['id']);
   }
 
-  getStockDetail(id) {
-    this.http.get('/stock/'+id).subscribe(data => {
-      this.stock = data;
-    });
-  }
-
+  getStockDetail(id: string) {
+    this.stockService.getData(id)
+    .subscribe(
+    response => {
+    this.stock = response;
+      });
+    }
 
 
  deleteStock(id) {
