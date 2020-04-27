@@ -39,7 +39,7 @@ console.log(res);
     this.stock.code = body.symbol;
     this.stock.latestTime = body.latestTime;
     this.stock.date = new Date();
-    this.stock.open = (body.iexRealtimePrice !== null) ? body.iexRealtimePrice : body.latestPrice;
+    this.stock.open = (body.iexRealtimePrice !== null && body.iexRealtimePrice !== 0) ? body.iexRealtimePrice : body.latestPrice;
     this.stock.latestPrice = (body.iexRealtimePrice !== null) ? body.iexRealtimePrice : body.latestPrice;
     this.stock.week52High = body.week52High;
     this.stock.week52Low = body.week52Low;
